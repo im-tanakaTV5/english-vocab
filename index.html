@@ -421,12 +421,12 @@ function parseCSV(name, text) {
 }
 
 async function init() {
-  const manifest = await fetch('words/manifest.json').then(r => r.json());
+  const manifest = await fetch('words/manifest.json', { cache: 'no-cache' }).then(r => r.json());
   const listEl = document.getElementById('set-list');
   listEl.innerHTML = '';
 
   for (const name of manifest) {
-    const words = parseCSV(name, await fetch(`words/${name}.csv`).then(r => r.text()));
+    const words = parseCSV(name, await fetch(`words/${name}.csv`, { cache: 'no-cache' }).then(r => r.text()));
     S.sets[name] = words;
 
     const item = document.createElement('div');
